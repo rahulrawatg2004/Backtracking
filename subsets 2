@@ -1,0 +1,20 @@
+https://leetcode.com/problems/subsets-ii/submissions/1951952982/
+
+class Solution {
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        Set<List<Integer>> set = new HashSet<>();
+        Arrays.sort(nums); // important!
+        backtrack(nums, 0, new ArrayList<>(), set);
+        return new ArrayList<>(set);
+    }
+
+    private void backtrack(int[] nums, int idx, List<Integer> temp, Set<List<Integer>> set) {
+        set.add(new ArrayList<>(temp));
+
+        for (int i = idx; i < nums.length; i++) {
+            temp.add(nums[i]);
+            backtrack(nums, i + 1, temp, set);
+            temp.remove(temp.size() - 1);
+        }
+    }
+}
